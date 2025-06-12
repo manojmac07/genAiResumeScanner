@@ -1,0 +1,10 @@
+image: mcr.microsoft.com/azure-functions/python:4
+
+pipelines:
+  default:
+    - step:
+        name: Deploy to Azure
+        script:
+          - echo "Building Function App ..."
+          #- func azure functionapp publish <YourFunctionAppName>
+          - echo "Deployment complete!"

@@ -1,0 +1,8 @@
+openai
+langchain
+langchain_openai
+langchain_community
+azure-search-documents
+azure-identity
+pypdf
+docx2txt

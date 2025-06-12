@@ -1,0 +1,93 @@
+# Python-related files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment directories
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+chatenv/
+../chatenv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VS Code related files
+.vscode/
+
+# macOS files
+.DS_Store
+
+# PyCharm related files
+.idea/
+
+# Log and debug files
+*.log
+*.pot
+*.pyo
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+releases/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Flask specific files
+instance/
+*.sqlite3
+
+# System-specific files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Ansible and deployment files
+*.retry
+
+# Azure and deployment
+.azure/
+*.azure/
+local.settings.json  # If using Azure Functions
+
+# IDE files
+*.sublime-workspace
+*.sublime-project
+
+# Other files
+*.bak
+
+# Ignore .env or any environment variable files
+.env
+
+# Ignore compiled files and archives like tarballs
+*.bzr
+*.git
+*.hg
+*.svn
+*.tar
+*.tgz
+*.zip
+*.rar

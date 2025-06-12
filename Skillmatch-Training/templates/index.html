@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Simple Chatbot</title>
+    <style>
+      #chat-box {
+        width: 300px;
+        height: 500px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 0 auto;
+        overflow-y: scroll;
+        margin-top: 50px;
+        background-color: #f9f9f9;
+      }
+      #user-input {
+        width: 60%;
+        padding: 10px;
+      }
+      #send-btn, #attach-btn {
+        padding: 10px;
+      }
+      .chat {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .user {
+        background-color: #e0f7fa;
+        text-align: right;
+      }
+      .bot {
+        background-color: #fff8e1;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chat-box">
+    </div>
+    <div style="text-align:center;">
+      <input type="text" id="user-input" placeholder="Type your message here...">
+      <button id="send-btn">Send</button>
+      <input type="file" id="file-input" style="display:none;">
+      <button id="attach-btn">Attach File</button>
+    </div>
+    <script>
+      document.getElementById('send-btn').onclick = function() {
+        const userInput = document.getElementById('user-input').value;
+
+        if (userInput.trim() !== '') {
+          const userChat = document.createElement('div');
+          userChat.className = 'chat user';
+          userChat.innerText = userInput;
+          document.getElementById('chat-box').appendChild(userChat);
+
+          fetch('/get_response', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `message=${userInput}`
+          }).then(response => response.json()).then(data => {
+            const botChat = document.createElement('div');
+            botChat.className = 'chat bot';
+            botChat.innerText = data.response;
+            document.getElementById('chat-box').appendChild(botChat);
+
+            document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+          });
+
+          document.getElementById('user-input').value = '';
+        }
+      };
+
+      document.getElementById('attach-btn').onclick = function() {
+        document.getElementById('file-input').click();
+
+        document.getElementById('file-input').onchange = function(event) {
+          const file = event.target.files[0];
+          if (file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            fetch('/upload', {
+              method: 'POST',
+              body: formData
+            }).then(response => response.json()).then(data => {
+              const botChat = document.createElement('div');
+              botChat.className = 'chat bot';
+              botChat.innerText = data.response;
+              document.getElementById('chat-box').appendChild(botChat);
+
+              document.getElementById('chat-box').scrollTop = document.getElementById('chat-box').scrollHeight;
+            });
+          }
+        };
+      };
+    </script>
+  </body>
+</html>
